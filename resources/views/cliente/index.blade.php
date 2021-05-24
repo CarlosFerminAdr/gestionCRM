@@ -8,8 +8,6 @@
     <thead>
         <th>Id</th>
         <th>Nombre</th>
-        <th>Apellido</th>
-        <th>Apellido</th>
         <th>Sexo</th>
         <th>Teléfono</th>
         <th>Dirección</th>
@@ -19,9 +17,8 @@
         @foreach ($clientes as $c)
             <tr>
                 <td>{{$c->id}}</td>
-                <td><a href="{{route('clientes.show',$c)}}">{{$c->nombre}}</a></td>
-                <td>{{$c->a_paterno}}</td>
-                <td>{{$c->a_materno}}</td>
+                <td><a href="{{route('clientes.show',$c)}}">
+                {{$c->nombre}} {{$c->a_paterno}} {{$c->a_materno}}</a></td>
                 <td>{{$c->sexo}}</td>
                 <td>{{$c->telefono}}</td>
                 <td>{{$c->direccion}}</td>

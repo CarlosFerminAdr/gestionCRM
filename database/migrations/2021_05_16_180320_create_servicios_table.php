@@ -15,10 +15,8 @@ class CreateServiciosTable extends Migration
     {
         Schema::create('servicios', function (Blueprint $table) {
             $table->id();
-            $table->string('codigo');
-            $table->string('fecha_inicio');
-            $table->string('fecha_fin');
-            $table->string('costo_servicio');
+            $table->string('fecha_hora');
+            $table->string('cantidad');
             $table->unsignedBigInteger('cliente_id');
             $table->foreign('cliente_id')
                     ->references('id')

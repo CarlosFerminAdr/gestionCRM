@@ -9,6 +9,8 @@ class Servicio extends Model
 {
     use HasFactory;
 
+    protected $guarded =[];
+
     public function cliente(){
         return $this->belongsTo('App\Models\Cliente');
     }

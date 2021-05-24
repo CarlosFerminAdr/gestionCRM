@@ -1,12 +1,12 @@
 <label for="">Categoria:</label>
-<input type="text" name="tipo" id="tipo" 
+<input type="text" name="tipo" id="tipo" required 
 value="{{isset($categoria->tipo)?$categoria->tipo:old('tipo')}}">
 @error('tipo')
     <small>* {{$message}}</small>
 @enderror
 <br><br>
 <label for="">Descripción:</label>
-<input type="text" name="descripcion" id="descripcion" 
+<input type="text" name="descripcion" id="descripcion" required 
 value="{{isset($categoria->descripcion)?$categoria->descripcion:old('descripcion')}}">
 @error('descripcion')
     <small>* {{$message}}</small>

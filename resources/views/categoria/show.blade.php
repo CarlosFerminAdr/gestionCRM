@@ -1,5 +1,9 @@
-<h1>{{$categoria->tipo}}</h1>
-<h1>{{$categoria->descripcion}}</h1>
+<h1>CONSULTAR CATEGORIA</h1>
+<hr>
+<h1>Categoria: {{$categoria->tipo}}</h1>
+<h1>Descripción: {{$categoria->descripcion}}</h1>
+<hr>
+<h1>PRODUCTOS DE ESTA CATEGORIA</h1>
 <hr>
 <ul>
     @foreach ($categoria->productos as $p)

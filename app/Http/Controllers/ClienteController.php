@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RequestCliente;
 use App\Models\Cliente;
 use Illuminate\Http\Request;
 
@@ -34,25 +35,9 @@ class ClienteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RequestCliente $request)
     {
-        //return $request;
-        $request->validate([
-            'nombre' => 'required|min:3|max:25',
-            'a_paterno' => 'required|min:3|max:25',
-            'a_materno' => 'required|min:3|max:25',
-            'sexo' => 'required|min:3|max:25',
-            'telefono' => 'required|min:3|max:25',
-            'direccion' => 'required|min:3|max:25'
-        ]);
-        $cliente = new Cliente();
-        $cliente->nombre = $request->nombre;
-        $cliente->a_paterno = $request->a_paterno;
-        $cliente->a_materno = $request->a_materno;
-        $cliente->sexo = $request->sexo;
-        $cliente->telefono = $request->telefono;
-        $cliente->direccion = $request->direccion;
-        $cliente->save();
+        Cliente::create($request->all());
         return redirect('clientes')->with('mensaje','Cliente agregado con exito!!');
     }
 
@@ -85,23 +70,10 @@ class ClienteController extends Controller
      * @param  \App\Models\Cliente  $cliente
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cliente $cliente)
+    public function update(RequestCliente $request, Cliente $cliente)
     {
-        $request->validate([
-            'nombre' => 'required|min:3|max:25',
-            'a_paterno' => 'required|min:3|max:25',
-            'a_materno' => 'required|min:3|max:25',
-            'sexo' => 'required|min:3|max:25',
-            'telefono' => 'required|min:3|max:25',
-            'direccion' => 'required|min:3|max:25'
-        ]);
-        $cliente->nombre = $request->nombre;
-        $cliente->a_paterno = $request->a_paterno;
-        $cliente->a_materno = $request->a_materno;
-        $cliente->sexo = $request->sexo;
-        $cliente->telefono = $request->telefono;
-        $cliente->direccion = $request->direccion;
-        $cliente->save();
+        $datos = request()->except(['_token','_method']);
+        Cliente::find($cliente->id)->update($datos);
         return redirect('clientes')->with('mensaje','Cliente actualizado con exito!!');
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RequestServicio;
 use App\Models\Servicio;
 use App\Models\Cliente;
 use App\Models\Producto;
@@ -38,16 +39,9 @@ class ServicioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RequestServicio $request)
     {
-        $servicio = new Servicio();
-        $servicio->codigo = $request->codigo;
-        $servicio->fecha_inicio = $request->fecha_inicio;
-        $servicio->fecha_fin = $request->fecha_fin;
-        $servicio->costo_servicio = $request->costo_servicio;
-        $servicio->cliente_id = $request->cliente_id;
-        $servicio->producto_id = $request->producto_id;
-        $servicio->save();
+        Servicio::create($request->all());
         return redirect('servicios')->with('mensaje','Servicio agregado con exito!!');
     }
 
@@ -82,15 +76,10 @@ class ServicioController extends Controller
      * @param  \App\Models\Servicio  $servicio
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Servicio $servicio)
+    public function update(RequestServicio $request, Servicio $servicio)
     {
-        $servicio->codigo = $request->codigo;
-        $servicio->fecha_inicio = $request->fecha_inicio;
-        $servicio->fecha_fin = $request->fecha_fin;
-        $servicio->costo_servicio = $request->costo_servicio;
-        $servicio->cliente_id = $request->cliente_id;
-        $servicio->producto_id = $request->producto_id;
-        $servicio->save();
+        $datos = request()->except(['_token','_method']);
+        Servicio::find($servicio->id)->update($datos);
         return redirect('servicios')->with('mensaje','Servicio actualizado con exito!!');
     }
 

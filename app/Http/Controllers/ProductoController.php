@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RequestProducto;
 use App\Models\Categoria;
 use App\Models\Producto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductoController extends Controller
 {
@@ -36,16 +38,13 @@ class ProductoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RequestProducto $request)
     {
-        $producto = new Producto();
-        $producto->foto = $request->foto;
-        $producto->nombre = $request->nombre;
-        $producto->marca = $request->marca;
-        $producto->stock = $request->stock;
-        $producto->precio = $request->precio;
-        $producto->categoria_id = $request->categoria_id;
-        $producto->save();
+        $datos = request()->except('_token');
+        if ($request->hasFile('foto')){
+            $datos['foto'] = $request->file('foto')->store('uploads','public');
+        }
+        Producto::insert($datos);
         return redirect('productos')->with('mensaje','Producto agregado con exito!!');
     }
 
@@ -79,15 +78,14 @@ class ProductoController extends Controller
      * @param  \App\Models\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Producto $producto)
+    public function update(RequestProducto $request, Producto $producto)
     {
-        $producto->foto = $request->foto;
-        $producto->nombre = $request->nombre;
-        $producto->marca = $request->marca;
-        $producto->stock = $request->stock;
-        $producto->precio = $request->precio;
-        $producto->categoria_id = $request->categoria_id;
-        $producto->save();
+        $datos = request()->except(['_token','_method']);
+        if ($request->hasFile('foto')){
+            Storage::delete('public/',$producto->id);
+            $datos['foto'] = $request->file('foto')->store('uploads','public');
+        }
+        Producto::where('id','=',$producto->id)->update($datos);
         return redirect('productos')->with('mensaje','Producto actualizado con exito!!');
     }
 

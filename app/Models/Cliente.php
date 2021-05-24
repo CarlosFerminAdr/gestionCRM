@@ -9,6 +9,8 @@ class Cliente extends Model
 {
     use HasFactory;
 
+    protected $guarded =[];
+
     public function servicios(){
         return $this->hasMany('App\Models\Servicio');
     }

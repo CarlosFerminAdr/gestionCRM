@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RequestCategoria;
 use App\Models\Categoria;
 use Illuminate\Http\Request;
 
@@ -34,17 +35,9 @@ class CategoriaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RequestCategoria $request)
     {
-        //return $request;
-        $request->validate([
-            'tipo' => 'required|min:3|max:25',
-            'descripcion' => 'required|min:3|max:50'
-        ]);
-        $categoria = new Categoria();
-        $categoria->tipo = $request->tipo;
-        $categoria->descripcion = $request->descripcion;
-        $categoria->save();
+        Categoria::create($request->all());
         return redirect('categorias')->with('mensaje','Categoria agregado con exito!!');
     }
 
@@ -77,15 +70,10 @@ class CategoriaController extends Controller
      * @param  \App\Models\Categoria  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Categoria $categoria)
+    public function update(RequestCategoria $request, Categoria $categoria)
     {
-        $request->validate([
-            'tipo' => 'required|min:3|max:25',
-            'descripcion' => 'required|min:3|max:50'
-        ]);
-        $categoria->tipo = $request->tipo;
-        $categoria->descripcion = $request->descripcion;
-        $categoria->save();
+        $datos = request()->except(['_token','_method']);
+        Categoria::find($categoria->id)->update($datos);
         return redirect('categorias')->with('mensaje','Categoria actualizado con exito!!');
     }
 
