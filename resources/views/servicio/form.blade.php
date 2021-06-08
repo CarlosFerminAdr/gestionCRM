@@ -1,3 +1,5 @@
+<h1>{{$modo}} SERVICIO</h1>
+<hr>
 <div>
     <label for="id">Codigo:</label>
     <input type="number" name="id" id="id" 

@@ -25,7 +25,7 @@ class RequestProducto extends FormRequest
     {
         return [
             'foto' => 'required|max:10000|mimes:jpg,png,jpeg',
-            'nombre' => 'required|min:3|max:20',
+            'nombre' => 'required|min:3|max:50',
             'marca' => 'required|min:3|max:50',
             'stock' => 'required|min:1|max:4',
             'precio' => 'required|min:1|max:4',

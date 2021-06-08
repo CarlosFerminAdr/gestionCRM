@@ -1,8 +1,8 @@
-<h1>EDITAR CLIENTE</h1>
-<hr>
-<form action="{{route('clientes.update',$cliente)}}" method="POST">
-    @csrf
-    @method('PUT')
-    @include('cliente.form',['modo'=>'Editar'])
-</form>
-<a href="{{route('clientes.index')}}">Regresar</a>
+@extends('layouts.app')
+@section('content')
+    <form action="{{route('clientes.update',$cliente)}}" method="POST">
+        @csrf
+        @method('PUT')
+        @include('cliente.form',['modo'=>'Editar'])
+    </form>
+@endsection

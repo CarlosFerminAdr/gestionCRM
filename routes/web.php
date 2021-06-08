@@ -18,10 +18,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
-Route::resource('categorias', CategoriaController::class);
-Route::resource('clientes', ClienteController::class);
+Route::resource('categorias', CategoriaController::class)->middleware('auth');
+Route::resource('clientes', ClienteController::class)->middleware('auth');
 Route::resource('productos', ProductoController::class);
 Route::resource('servicios', ServicioController::class);
+
+Auth::routes(['register'=>true, 'reset'=>false]);
+
+Route::group(['middleware' => 'auth'], function(){
+    Route::get('/', [ClienteController::class, 'index'])->name('home');
+});
