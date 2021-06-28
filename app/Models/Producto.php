@@ -16,6 +16,6 @@ class Producto extends Model
     }
 
     public function servicios(){
-        return $this->hasMany('App\Models\Servicio');
+        return $this->belongsToMany(Servicio::class);
     }
 }

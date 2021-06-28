@@ -67,7 +67,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'America/Mexico_City', //FECHA Y HORA ACTUAL
 
     /*
     |--------------------------------------------------------------------------

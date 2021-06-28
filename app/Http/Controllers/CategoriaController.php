@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\RequestCategoria;
 use App\Models\Categoria;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CategoriaController extends Controller
 {
@@ -15,7 +16,7 @@ class CategoriaController extends Controller
      */
     public function index()
     {
-        $categorias = Categoria::paginate(5);
+        $categorias = Categoria::paginate(3);
         return view('categoria.index',compact('categorias'));
     }
 
@@ -85,7 +86,14 @@ class CategoriaController extends Controller
      */
     public function destroy(Categoria $categoria)
     {
-        $categoria->delete();
-        return redirect('categorias')->with('mensaje','Categoria eliminado con exito!!');
+        try{
+            DB::beginTransaction();
+                $categoria->delete();
+            DB::commit();
+                return redirect('categorias')->with('mensaje','Categoria eliminado con exito!!');
+        }catch(\Exception $e){
+            DB::rollBack();
+                return redirect('categorias')->with('mensaje','No se puede eliminal la Categoria, por las Reglas de Integridad Referencial!');
+        }
     }
 }

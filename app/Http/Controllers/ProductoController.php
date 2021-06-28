@@ -7,6 +7,7 @@ use App\Models\Categoria;
 use App\Models\Producto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class ProductoController extends Controller
 {
@@ -97,7 +98,14 @@ class ProductoController extends Controller
      */
     public function destroy(Producto $producto)
     {
-        $producto->delete();
-        return redirect('productos')->with('mensaje','Producto eliminado con exito!!');
+        try{
+            DB::beginTransaction();
+                $producto->delete();
+            DB::commit();
+                return redirect('productos')->with('mensaje','Producto eliminado con exito!!');
+        }catch(\Exception $e){
+            DB::rollBack();
+                return redirect('productos')->with('mensaje','No se puede eliminal el Producto, por las Reglas de Integridad Referencial!');
+        }
     }
 }

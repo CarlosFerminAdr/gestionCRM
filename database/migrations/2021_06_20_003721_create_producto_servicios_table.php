@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateServiciosTable extends Migration
+class CreateProductoServiciosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,22 +13,19 @@ class CreateServiciosTable extends Migration
      */
     public function up()
     {
-        Schema::create('servicios', function (Blueprint $table) {
+        Schema::create('producto_servicio', function (Blueprint $table) {
             $table->id();
-            $table->string('fecha');
-            $table->string('hora');
-            $table->float('costo_total');
             $table->integer('cantidad');
-            $table->unsignedBigInteger('cliente_id');
-            $table->foreign('cliente_id')
+            $table->unsignedBigInteger('producto_id');
+            $table->foreign('producto_id')
                     ->references('id')
-                    ->on('clientes')
+                    ->on('productos')
                     ->onDelete('restrict')
                     ->onUpdate('cascade');
-            $table->unsignedBigInteger('categoria_id');
-            $table->foreign('categoria_id')
+            $table->unsignedBigInteger('servicio_id');
+            $table->foreign('servicio_id')
                     ->references('id')
-                    ->on('categorias')
+                    ->on('servicios')
                     ->onDelete('restrict')
                     ->onUpdate('cascade');
             $table->timestamps();
@@ -42,6 +39,6 @@ class CreateServiciosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('servicios');
+        Schema::dropIfExists('producto_servicios');
     }
 }

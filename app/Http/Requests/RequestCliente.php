@@ -27,9 +27,9 @@ class RequestCliente extends FormRequest
             'nombre' => 'required|min:3|max:25',
             'a_paterno' => 'required|min:3|max:25',
             'a_materno' => 'required|min:3|max:25',
-            'sexo' => 'required|min:3|max:25',
             'telefono' => 'required|min:3|max:25',
-            'direccion' => 'required|min:3|max:25'
+            'direccion' => 'required|min:3|max:25',
+            'genero_id' => 'required'
         ];
     }
 
@@ -38,9 +38,9 @@ class RequestCliente extends FormRequest
             'nombre' => 'Nombre del Cliente',
             'a_paterno' => 'Apellido Paterno',
             'a_materno' => 'Apellido Materno',
-            'sexo' => 'Sexo del Cliente',
             'telefono' => 'Número Telefónico',
-            'direccion' => 'Dirección'
+            'direccion' => 'Dirección',
+            'genero_id' => 'Sexo del Cliente'
         ];
     }
 }

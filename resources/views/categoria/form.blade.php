@@ -4,9 +4,12 @@
     <div class="row">
         <div class="col-sm-6 offset-3">
             <div class="card">
-                <div class="card-body">
+                <div class="card-header text-center" style="background-color: black;">
+                    <strong style="color:white">Formulario Categoria</strong>
+                </div>
+                <div class="card-body" style="background-color: Darkred;">
                     <div class="mb-3">
-                        <label for="tipo" class="form-label">Categoria:</label>
+                        <label for="tipo" class="form-label"><strong style="color:white">Categoria:</strong></label>
                         <input type="text" class="form-control" name="tipo" id="tipo" required 
                         value="{{isset($categoria->tipo)?$categoria->tipo:old('tipo')}}">
                         @error('tipo')
@@ -15,7 +18,7 @@
                     </div>
                     <br>
                     <div class="mb-3">
-                        <label for="descripcion" class="form-label">Descripción:</label>
+                        <label for="descripcion" class="form-label"><strong style="color:white">Descripción: </strong></label>
                         <input type="text" class="form-control" name="descripcion" id="descripcion" required 
                         value="{{isset($categoria->descripcion)?$categoria->descripcion:old('descripcion')}}">
                         @error('descripcion')

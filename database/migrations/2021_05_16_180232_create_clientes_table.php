@@ -18,9 +18,14 @@ class CreateClientesTable extends Migration
             $table->string('nombre');
             $table->string('a_paterno');
             $table->string('a_materno');
-            $table->string('sexo');
             $table->string('telefono');
             $table->string('direccion');
+            $table->unsignedBigInteger('genero_id');
+            $table->foreign('genero_id')
+                    ->references('id')
+                    ->on('generos')
+                    ->onDelete('restrict')
+                    ->onUpdate('cascade');
             $table->timestamps();
         });
     }

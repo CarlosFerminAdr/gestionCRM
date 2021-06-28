@@ -17,8 +17,10 @@ class ServicioController extends Controller
      */
     public function index()
     {
+        /*
         $servicios = Servicio::paginate(10);
         return view('servicio.index',compact('servicios'));
+        */
     }
 
     /**
@@ -28,9 +30,11 @@ class ServicioController extends Controller
      */
     public function create()
     {
+        /*
         $clientes = Cliente::all();
         $productos = Producto::all();
         return view('servicio.create',compact('clientes','productos'));
+        */
     }
 
     /**
@@ -41,8 +45,10 @@ class ServicioController extends Controller
      */
     public function store(RequestServicio $request)
     {
+        /*
         Servicio::create($request->all());
         return redirect('servicios')->with('mensaje','Servicio agregado con exito!!');
+        */
     }
 
     /**
@@ -53,7 +59,9 @@ class ServicioController extends Controller
      */
     public function show(Servicio $servicio)
     {
+        /*
         return view('servicio.show',compact('servicio'));
+        */
     }
 
     /**
@@ -64,9 +72,11 @@ class ServicioController extends Controller
      */
     public function edit(Servicio $servicio)
     {
+        /*
         $clientes = Cliente::all();
         $productos = Producto::all();
         return view('servicio.edit',compact('servicio','clientes','productos'));
+        */
     }
 
     /**
@@ -78,9 +88,11 @@ class ServicioController extends Controller
      */
     public function update(RequestServicio $request, Servicio $servicio)
     {
+        /*
         $datos = request()->except(['_token','_method']);
         Servicio::find($servicio->id)->update($datos);
         return redirect('servicios')->with('mensaje','Servicio actualizado con exito!!');
+        */
     }
 
     /**
@@ -91,7 +103,9 @@ class ServicioController extends Controller
      */
     public function destroy(Servicio $servicio)
     {
+        /*
         $servicio->delete();
         return redirect('servicios')->with('mensaje','Servicio eliminado con exito!!');
+        */
     }
 }

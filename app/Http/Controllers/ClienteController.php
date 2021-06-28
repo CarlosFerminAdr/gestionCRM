@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RequestCliente;
+use App\Models\Genero;
 use App\Models\Cliente;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ClienteController extends Controller
 {
@@ -15,7 +17,7 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        $clientes = Cliente::paginate(5);
+        $clientes = Cliente::paginate(2);
         return view('cliente.index',compact('clientes'));
     }
 
@@ -26,7 +28,8 @@ class ClienteController extends Controller
      */
     public function create()
     {
-        return view('cliente.create');
+        $generos = Genero::all();
+        return view('cliente.create',compact('generos'));
     }
 
     /**
@@ -60,7 +63,8 @@ class ClienteController extends Controller
      */
     public function edit(Cliente $cliente)
     {
-        return view('cliente.edit',compact('cliente'));
+        $generos = Genero::all();
+        return view('cliente.edit',compact('cliente','generos'));
     }
 
     /**
@@ -85,7 +89,14 @@ class ClienteController extends Controller
      */
     public function destroy(Cliente $cliente)
     {
-        $cliente->delete();
-        return redirect('clientes')->with('mensaje','Cliente eliminado con exito!!');
+        try{
+            DB::beginTransaction();
+                $cliente->delete();
+            DB::commit();
+                return redirect('clientes')->with('mensaje','Cliente eliminado con exito!!');
+        }catch(\Exception $e){
+            DB::rollBack();
+                return redirect('clientes')->with('mensaje','No se puede eliminal el Cliente, por las Reglas de Integridad Referencial!');
+        }
     }
 }

@@ -3,7 +3,7 @@
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\ProductoController;
-use App\Http\Controllers\ServicioController;
+use App\Http\Controllers\ProductoServicioController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,11 +23,10 @@ Route::get('/', function () {
 
 Route::resource('categorias', CategoriaController::class)->middleware('auth');
 Route::resource('clientes', ClienteController::class)->middleware('auth');
-Route::resource('productos', ProductoController::class);
-Route::resource('servicios', ServicioController::class);
+Route::resource('productos', ProductoController::class)->middleware('auth');
+Route::resource('proservicio', ProductoServicioController::class)->middleware('auth');
 
 Auth::routes(['register'=>true, 'reset'=>false]);
 
-Route::group(['middleware' => 'auth'], function(){
-    Route::get('/', [ClienteController::class, 'index'])->name('home');
-});
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

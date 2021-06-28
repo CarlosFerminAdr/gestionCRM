@@ -11,6 +11,10 @@ class Cliente extends Model
 
     protected $guarded =[];
 
+    public function genero(){
+        return $this->belongsTo('App\Models\Genero');
+    }
+
     public function servicios(){
         return $this->hasMany('App\Models\Servicio');
     }

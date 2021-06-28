@@ -1,0 +1,15 @@
+.navbar-laravel {
+    background-color: Darkred;
+}
+
+.navbar-laravel .navbar-nav .nav-link {
+    color: #fff;
+}
+
+.navbar-laravel .navbar-brand {
+  color: #fff;
+}
+
+body{
+  background-color: Khaki;
+}

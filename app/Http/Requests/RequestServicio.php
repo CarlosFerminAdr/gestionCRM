@@ -24,8 +24,9 @@ class RequestServicio extends FormRequest
     public function rules()
     {
         return [
-            'fecha_hora' => 'required',
-            'cantidad' => 'required|min:1|max:4',
+            'fecha' => 'required',
+            'hora' => 'required',
+            'cantidad' => 'required|min:1|max:5',
             'cliente_id' => 'required',
             'producto_id' => 'required'
         ];
@@ -33,7 +34,8 @@ class RequestServicio extends FormRequest
 
     public function attributes(){
         return [
-            'fecha_hora' => 'Fecha y Hora ',
+            'fecha' => 'Fecha',
+            'hora' => 'Hora',
             'cantidad' => 'Cantidad de Productos',
             'cliente_id' => 'Nombre del Cliente',
             'producto_id' => 'Producto o Servicio'

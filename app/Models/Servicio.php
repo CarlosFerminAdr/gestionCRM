@@ -9,13 +9,17 @@ class Servicio extends Model
 {
     use HasFactory;
 
-    protected $guarded =[];
+    protected $fillable = ['fecha','hora','costo_total', 'cantidad', 'cliente_id', 'categoria_id'];
 
-    public function cliente(){
-        return $this->belongsTo('App\Models\Cliente');
+    public function productos(){
+        return $this->belongsToMany(Producto::class);
     }
 
-    public function producto(){
-        return $this->belongsTo('App\Models\Producto');
+    public function categoria(){
+        return $this->belongsTo(Categoria::class);
+    }
+
+    public function cliente(){
+        return $this->belongsTo(Cliente::class);
     }
 }
